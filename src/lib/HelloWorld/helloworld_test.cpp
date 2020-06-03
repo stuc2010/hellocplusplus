@@ -1,5 +1,5 @@
 #include "helloworld.hpp"
-#include "../gtest/gtest.h"
+//#include "../gtest/gtest.h"
 
 namespace {
     TEST(HelloWorld, True) {
