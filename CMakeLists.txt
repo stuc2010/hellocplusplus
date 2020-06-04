@@ -8,6 +8,8 @@ set(CMAKE_CXX_STANDARD 11)
 set(CMAKE_CXX_STANDARD_REQUIRED True)
 set(LIBRARY_DIR "${PROJECT_SOURCE_DIR}/src/lib/")
 
+enable_testing()
+
 add_subdirectory("${LIBRARY_DIR}/HelloWorld")
 add_subdirectory("${PROJECT_SOURCE_DIR}/tests")
 
