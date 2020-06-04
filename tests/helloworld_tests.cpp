@@ -2,9 +2,17 @@
 #include <gtest/gtest.h>
 
 TEST(HelloWorld, True) {
-    EXPECT_EQ(true, false);
-};
+    string expectedMsg = "Hello the condition is true.";
+
+    HelloWorld hello(true);
+    string msg = hello.get_message();
+    ASSERT_EQ(expectedMsg, msg);
+}
 
 TEST(HelloWorld, False) {
-    EXPECT_EQ(false, true);
-};
+    string expectedMessage = "Hello the condition is false.";
+
+    HelloWorld hello(false);
+    string msg = hello.get_message();
+    ASSERT_EQ(expectedMessage, msg);
+}

@@ -37,7 +37,7 @@ add_subdirectory(${CMAKE_CURRENT_BINARY_DIR}/googletest-src
                  EXCLUDE_FROM_ALL)
 
 # Set the executable
-add_executable(Hello ./src/hello.cpp)
+add_executable(Hello ./src/main.cpp)
 
 target_link_libraries(Hello PUBLIC HelloWorld)
 target_include_directories(Hello PUBLIC "${PROJECT_BINARY_DIR}")
