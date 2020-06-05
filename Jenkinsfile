@@ -1,10 +1,5 @@
 pipeline{
     agent any
-    options {
-        buildDiscarder(logRotater(numToKeepStr: '10'))
-        skipDefaultCheckout(true)
-        disableConcurrentBuilds()
-    }
 
     stages {
         stage('Configure') {
