@@ -4,17 +4,17 @@ pipeline{
     stages {
         stage('Configure') {
             steps{
-                // cmake(
-                //     arguments: '. -B build',
-                //     installation: 'AutoInstall'
-                // )
+                cmake(
+                    arguments: '-B build',
+                    installation: 'AutoInstall'
+                )
                 cmakeBuild(
                     generator: 'Unix Makefiles',
                     buildDir: 'build',
                     buildType: 'Release',
                     sourceDir: '.',
                     cleanBuild: true,
-                    steps: [[args: '-B build', withCmake: true]],
+                    steps: [[withCmake: true]],
                     installation: 'AutoInstall'
                 )
             }
