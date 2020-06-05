@@ -6,7 +6,8 @@ pipeline{
             steps{
                 cmake(
                     arguments: '..',
-                    workingDir: 'build'
+                    workingDir: 'build',
+                    installation: 'AutoInstall'
                 )
                 cmakeBuild(
                     generator: 'Unix Makefiles',
