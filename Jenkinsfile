@@ -12,7 +12,6 @@ pipeline{
                     generator: 'Unix Makefiles',
                     buildDir: 'build',
                     buildType: 'Release',
-                    sourceDir: '.',
                     cleanBuild: true,
                     steps: [[args: '-B build'], [withCmake: true]],
                     installation: 'AutoInstall'
