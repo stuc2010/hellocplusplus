@@ -2,12 +2,14 @@ pipeline{
     agent any
 
     stages {
-        stage('Build') {
+        stage('Configure') {
             steps{
                 cmakeBuild(
                     generator: 'Unix Makefiles',
                     buildDir: 'build',
                     buildType: 'Release',
+                    sourceDir: '${WORKSPACE}'
+                    cleanBuild: true,
                     steps: [[withCmake: true]],
                     installation: 'AutoInstall'
                 )
