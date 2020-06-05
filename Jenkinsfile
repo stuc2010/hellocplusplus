@@ -1,7 +1,7 @@
 pipeline{
     agent any
     tools {
-        CMake 'AutoInstall'
+        CMake
     }
     options {
         buildDiscarder(logRotater(numToKeepStr: '10'))
