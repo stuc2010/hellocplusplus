@@ -8,7 +8,7 @@ pipeline{
                     generator: 'Unix Makefiles',
                     buildDir: 'build',
                     buildType: 'Release',
-                    sourceDir: '${WORKSPACE}',
+                    sourceDir: '.',
                     cleanBuild: true,
                     steps: [[withCmake: true]],
                     installation: 'AutoInstall'
