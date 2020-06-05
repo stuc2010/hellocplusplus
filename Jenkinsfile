@@ -2,21 +2,27 @@ pipeline{
     agent any
 
     stages {
-        stage('Configure') {
+        stage('Build') {
             steps{
                 cmakeBuild(
+                    generator: 'Unix Makefiles',
+                    buildDir: 'build',
+                    buildType: 'Release',
+                    withCmake: true,
                     installation: 'AutoInstall'
                 )
             }
         }
 
-        // stage('build') {
-        //     steps{
-        //         dir('build') {
-        //             sh 'cmake --build .'
-        //         }
-        //     }
-        // }
+        stage('Test') {
+            steps{
+                ctest(
+                    arguments: '-T test --no-compress-output',
+                    installation: 'AutoInstall',
+                    workingDir: 'build'
+                )
+            }
+        }
     }
 
     // post {
