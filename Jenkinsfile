@@ -13,7 +13,7 @@ pipeline{
                 //     steps: [[args: '-B build'], [withCmake: true]],
                 //     installation: 'AutoInstall'
                 // )
-                cmake:(
+                cmake(
                     installation: 'AutoInstall',
                     arguments: '-G "Unix Makefiles" -d CMAKE_BUILD_TYPE=Release -B ./build .'
                 )
