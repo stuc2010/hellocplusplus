@@ -1,5 +1,8 @@
 pipeline{
     agent any
+    tools {
+        CMake 'AutoInstall'
+    }
     options {
         buildDiscarder(logRotater(numToKeepStr: '10'))
         skipDefaultCheckout(true)
@@ -7,16 +10,19 @@ pipeline{
     }
 
     stages {
-        stage('Build') {
+        stage('Configure') {
             steps{
-                cmake arguments: '-G "Unix Makefiles" -d CMAKE_BUILD_TYPE=Release -H ./ -B ./build', installation: 'AutoInstall'
-                cmakeBuild buildType: 'Release', cleanBuild: true, installation: 'AutoInstall', steps[[withCmake: true]] 
+                dir('build') {
+                    sh 'cmake -G "Unix Makefiles" -D CMAKE_BUILD_TYPE=Release ../'
+                }
             }
         }
 
-        stage('Test') {
-            steps {
-                ctest arguments: '-T test --no-compress-output', installation: 'AutoInstall'
+        stage('build') {
+            steps{
+                dir('build') {
+                    sh 'ctest -T test --no-compress-output'
+                }
             }
         }
     }
@@ -24,7 +30,12 @@ pipeline{
     post {
         always {
             archiveArtifacts(
-                artifacts: 'build/Testing/**/*.xml', 'build/Hello', fingerprint: true
+                artifacts: 'build/Hello', 
+                fingerprint: true
+            )
+            archiveArtifacts(
+                artifacts: 'build/Testing/**/*.xml',
+                fingerprint: true
             )
         }
     }
