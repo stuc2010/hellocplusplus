@@ -37,16 +37,32 @@ pipeline{
         }
     }
 
-    // post {
-    //     always {
-    //         archiveArtifacts(
-    //             artifacts: 'build/Hello', 
-    //             fingerprint: true
-    //         )
-    //         archiveArtifacts(
-    //             artifacts: 'build/Testing/**/*.xml',
-    //             fingerprint: true
-    //         )
-    //     }
-    // }
+    post {
+        always {
+            archiveArtifacts(
+                artifacts: 'build/Hello', 
+                fingerprint: true
+            )
+            archiveArtifacts(
+                artifacts: 'build/Testing/**/*.xml',
+                fingerprint: true
+            )
+
+            xunit(
+                testTimeMargin: '3000',
+                thresholdMode: 1,
+                thresholds: [
+                    skipped(failureThreshold: '0'),
+                    failed(failureThreshold: '0')
+                ],
+                tools: [CTest(
+                    pattern: 'build/Testing/**/*.xml',
+                    deleteOutputFiles: true,
+                    failIfNotNew: false,
+                    skipNoTestFiles: true,
+                    stopProcessingIfError: true
+                )]
+            )
+        }
+    }
 }
