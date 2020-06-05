@@ -15,7 +15,8 @@ pipeline{
                 // )
                 cmake(
                     installation: 'AutoInstall',
-                    arguments: '-G "Unix Makefiles" -d CMAKE_BUILD_TYPE=Release -B ./build .'
+                    arguments: '-G "Unix Makefiles" -d CMAKE_BUILD_TYPE=Release ..',
+                    workingDir: 'build'
                 )
                 cmake(
                     installation: 'AutoInstall',
