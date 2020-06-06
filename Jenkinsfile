@@ -74,7 +74,6 @@ pipeline {
                     stopProcessingIfError: true
                 )]
             )
-            artifactoryServer.uploadSpec spec: uploadSpec
         }
     }
 }
