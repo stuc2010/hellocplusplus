@@ -39,18 +39,17 @@ pipeline {
     }
 
     post {
-        // Setup the requirements for Artifactory. Assumes Jenkins and Artifactory configured as per https://github.com/stuc2010/jenkins-playground
-        def artifactoryServer = Artifactory.server 'ArtifactoryPlayground'
-        def uploadSpec = """{
-            "files": [
-                {
-                    "pattern": "build/Hello",
-                    "target": "generic-local/CPlusPlus/Hello"
-                }
-            ]
-        }"""
-        
         always {
+            // Setup the requirements for Artifactory. Assumes Jenkins and Artifactory configured as per https://github.com/stuc2010/jenkins-playground
+            def artifactoryServer = Artifactory.server 'ArtifactoryPlayground'
+            def uploadSpec = """{
+                "files": [
+                    {
+                        "pattern": "build/Hello",
+                        "target": "generic-local/CPlusPlus/Hello"
+                    }
+                ]
+            }"""
             archiveArtifacts(
                 artifacts: 'build/Hello', 
                 fingerprint: true
