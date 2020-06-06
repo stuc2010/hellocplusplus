@@ -1,6 +1,17 @@
 pipeline{
-    agent any
+    // Setup the requirements for Artifactory. Assumes Jenkins and Artifactory configured as per https://github.com/stuc2010/jenkins-playground
+    def artifactoryServer = Artifactory.server 'ArtifactoryPlayground'
+    def uploadSpec = """{
+        "files": [
+            {
+                "pattern": "build/Hello",
+                "target": "generic-local/CPlusPlus/Hello"
+            }
+        ]
+    }"""
 
+    agent any
+    
     stages {
         stage('Build') {
             steps{
@@ -63,6 +74,7 @@ pipeline{
                     stopProcessingIfError: true
                 )]
             )
+            artifactoryServer.uploadSpec spec: uploadSpec
         }
     }
 }
