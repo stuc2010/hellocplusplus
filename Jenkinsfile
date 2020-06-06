@@ -40,10 +40,7 @@ pipeline {
 
     post {
         always {
-            archiveArtifacts(
-                artifacts: 'build/Hello', 
-                fingerprint: true
-            )
+            // Assumes Artifactory plugin is installed and configured with id "ArtifactoryPlayground" as per https://github.com/stuc2010/jenkins-playground/
             rtUpload(
                 serverId: 'ArtifactoryPlayground',
                 spec: """{
